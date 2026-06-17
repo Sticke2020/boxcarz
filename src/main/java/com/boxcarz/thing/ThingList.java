@@ -1,9 +1,7 @@
 package com.boxcarz.thing;
 
-
 import java.util.ArrayList;
 import com.boxcarz.item.Item;
-
 
 
 public class ThingList extends ArrayList<Thing> {
@@ -17,11 +15,23 @@ public class ThingList extends ArrayList<Thing> {
         } else {
             for (Thing t : this) {
                 items = items + t.getName() + ": " + t.getDescription() + ". " +
-                    "Value = " + Item.getValue() + " Gold\n";
+                    "Value = " + ((Item) t).getValue() + " Gold\n";
             }
         }
         return items;
     }
+    
 
-
+   public Thing thisItem(String name) {
+       Thing item = null;
+       String itemName = "";
+       String nameLowerCase = name.trim().toLowerCase();
+       for (Thing t : this) {
+           itemName = t.getName().trim().toLowerCase();
+           if (itemName.equals(nameLowerCase)) {
+               item = t;
+            }
+        }
+       return item;
+    }
 }

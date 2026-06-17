@@ -1,82 +1,120 @@
 package com.boxcarz.game;
 
-import java.util.ArrayList;
 import com.boxcarz.actor.Actor;
-import com.boxcarz.world.Room;
-import com.boxcarz.util.InputHelper;
-import com.boxcarz.commands.CommandParser;
-import com.boxcarz.thing.ThingList;
 import com.boxcarz.item.Item;
+import com.boxcarz.thing.ThingList;
 import com.boxcarz.world.Direction;
+import com.boxcarz.world.Room;
+import com.boxcarz.commands.Commands;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Game {
-    public static ArrayList<Room> map;
-    public static Actor player;
- 
+public class Game implements Serializable{
+
+    private ArrayList<Room> map;
+    private Actor player;
 
     // The method that runs in the main method to start the game
     public Game() {
-        this.map = new ArrayList<Room>();
-        
+        map = new ArrayList<Room>();
+
         // ADD THINGS TO THE ROOMS
         ThingList cabooseList = new ThingList();
         cabooseList.add(new Item("Bottle", "There is water inside", 5));
 
         ThingList redBoxCarList = new ThingList();
         redBoxCarList.add(new Item("Knife", "This knife is dull and rusty", 5));
-        redBoxCarList.add(new Item("Sweater", "The sweater is full of holes", 5));
+        redBoxCarList.add(
+            new Item("Sweater", "The sweater is full of holes", 5)
+        );
 
         ThingList blueBoxCarList = new ThingList();
 
         ThingList greenBoxCarList = new ThingList();
         greenBoxCarList.add(new Item("Crackers", "Stale crackers", 5));
 
+        ThingList yellowSleeperCarList = new ThingList();
+
         ThingList playerList = new ThingList();
 
-
         // ADD ROOMS TO THE MAP (N, E, S, W)
-        map.add(new Room("Caboose", "The last car on the train", 1, Direction.NOEXIT, Direction.NOEXIT, Direction.NOEXIT, cabooseList));
-        map.add(new Room("Red BoxCar", "A red boxcar", 2, Direction.NOEXIT, 0, Direction.NOEXIT, redBoxCarList));
-        map.add(new Room("Blue BoxCar", "A blue boxcar", 3, Direction.NOEXIT, 1, Direction.NOEXIT, blueBoxCarList));
-        map.add(new Room("Green BoxCar", "A green boxcar", 4, Direction.NOEXIT, 2, Direction.NOEXIT, greenBoxCarList));
-
+        map.add(
+            new Room(
+                "Caboose",
+                "The last car on the train",
+                1,
+                Direction.NOEXIT,
+                Direction.NOEXIT,
+                Direction.NOEXIT,
+                cabooseList
+            )
+        );
+        map.add(
+            new Room(
+                "Red BoxCar",
+                "A red boxcar",
+                2,
+                Direction.NOEXIT,
+                0,
+                Direction.NOEXIT,
+                redBoxCarList
+            )
+        );
+        map.add(
+            new Room(
+                "Blue BoxCar",
+                "A blue boxcar",
+                3,
+                Direction.NOEXIT,
+                1,
+                Direction.NOEXIT,
+                blueBoxCarList
+            )
+        );
+        map.add(
+            new Room(
+                "Green BoxCar",
+                "A green boxcar",
+                4,
+                Direction.NOEXIT,
+                2,
+                Direction.NOEXIT,
+                greenBoxCarList
+            )
+        );
+        map.add(
+            new Room(
+                "Yellow SleeperCar",
+                "A yellow sleepercar for passengers",
+                Direction.NOEXIT,
+                Direction.NOEXIT,
+                3,
+                Direction.NOEXIT,
+                yellowSleeperCarList
+            )
+        );
 
         // CREATE PLAYER AND PLACE IN ROOM 0
-        player = new Actor("Player", "A strong apocalypse survivor", playerList, map.get(0));
-
+        player = new Actor(
+            "Player",
+            "A strong apocalypse survivor",
+            playerList,
+            map.get(0)
+        );
     } // END OF GAME METHOD
 
-
-    public static ArrayList<Room> getMap() {
+    public ArrayList<Room> getMap() {
         return map;
     }
 
-    
-    public static Actor getPlayer() {
+    public Actor getPlayer() {
         return player;
     }
 
-
-
-    public static void run() {
-        String input;
-        String output;
-
-        showIntro();
-
-        do {
-            System.out.print("> ");
-            input = InputHelper.readLine();
-            output = CommandParser.runCommand(input);
-            System.out.println(output);
-        } while (!"q".equals(input));
-    }
-    
-
     // GAME INTRO FOR NEW GAMES
     public static void showIntro() {
-        System.out.println(""); 
+        System.out.println("");
         System.out.println("Welcome to boxcarz");
         System.out.println(" ________   ________   ________   ________   ________        ");
         System.out.println("| []  [] | | []  [] | |        | | []  [] | |     [] |__     ");
@@ -86,11 +124,7 @@ public class Game {
         System.out.println("You are a survivor of the apocalypse.");
         System.out.println("You awake in a train car with no memory of how you got there.");
         System.out.println("It's dim and you are in desperate need of water.");
-        System.out.println("Find a way out! [Enter n, s, e, or w] (to move) [Enter q] (to quit).");
-
+        System.out.println("Find a way out!"); 
+        Commands.help();
     }
-        
-     
-
-
 } // END OF GAME CLASS

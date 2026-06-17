@@ -1,11 +1,10 @@
 package com.boxcarz.commands;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import com.boxcarz.commands.Commands;
 import com.boxcarz.item.Item;
 import com.boxcarz.world.Map;
+import com.boxcarz.game.Game;
 
 
 
@@ -15,7 +14,7 @@ public class CommandParser {
     
 
     // RUNS USER INPUT COMMANDS 
-    public static String runCommand(String input) {
+    public static String runCommand(Game game, String input) {
         List<String> wl;
         String response = "ok";
         String inputLowerCase = input.trim().toLowerCase();
@@ -25,7 +24,7 @@ public class CommandParser {
                 response = "You must enter a command";
             } else {
                 wl = wordList(inputLowerCase);
-                response = parseCommand(wl);
+                response = parseCommand(game, wl);
             }
         }
         return response;
@@ -33,13 +32,13 @@ public class CommandParser {
     
 
     // Takes the wordlist from wordlist() and parses the words into individual variables
-    public static String parseCommand(List<String> wordlist) {
+    public static String parseCommand(Game game, List<String> wordlist) {
         String msg;
 
         if (wordlist.size() == 1) {
-            msg = processVerb(wordlist);
+            msg = processVerb(game, wordlist);
         } else if (wordlist.size() == 2) {
-            msg = processVerbNoun(wordlist);
+            msg = processVerbNoun(game, wordlist);
         } else {
             msg = "Only 1 or 2 word commands allowed!";
         }
@@ -47,7 +46,7 @@ public class CommandParser {
     } // END OF PARSECOMMAND() METHOD
 
 
-    public static String processVerb(List<String> wordlist) {
+    public static String processVerb(Game game, List<String> wordlist) {
         String verb = wordlist.get(0);
         String msg = "";
 
@@ -56,20 +55,27 @@ public class CommandParser {
         } else {
             switch (verb) {
                 case "n":
-                    Map.goNorth();
+                    Map.goNorth(game);
                     break;
                 case "e":
-                    Map.goEast();
+                    Map.goEast(game);
                     break;
                 case "s":
-                    Map.goSouth();
+                    Map.goSouth(game);
                     break;
                 case "w":
-                    Map.goWest();
+                    Map.goWest(game);
                     break;
                 case "look":
-                    Commands.look();
+                    Commands.look(game);
                     break;
+                case "i":
+                case "inventory":
+                    Commands.showInventory(game);
+                    break;
+                case "help":
+                    Commands.help();
+                   break; 
                 default:
                     msg = verb + " (not yet implemented)";
                     break;
@@ -79,18 +85,34 @@ public class CommandParser {
     }
 
 
-    public static String processVerbNoun(List<String> wordlist) {
+    public static String processVerbNoun(Game game, List<String> wordlist) {
         String verb = wordlist.get(0);
         String noun = wordlist.get(1);
         String msg = "";
+        boolean error = false;
 
         if (!commands.contains(verb)) {
             msg = verb + " is not a known verb! ";
+            error = true;
         }
         if (!items.contains(noun)) {
             msg += (noun + " is not a known noun!");
+            error = true;
         }
-        msg += " (not yet implemented)";
+        
+        if (!error) {
+            switch (verb) {
+                case "take":
+                    msg = Commands.takeItem(game, noun);
+                    break;
+                case "drop":
+                    msg = Commands.dropItem(game, noun);
+                    break;
+                default:
+                    msg += " (not yet implemented)";
+                    break;
+            }
+        }
         return msg;
     }
 

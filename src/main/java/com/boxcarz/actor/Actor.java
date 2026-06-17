@@ -6,7 +6,7 @@ import com.boxcarz.world.Room;
 
 
 // This will be a super class for Player, Monster, NPC, Creature, etc
-public class Actor extends ThingHolder{
+public class Actor extends ThingHolder {
     private Room room;
 
 

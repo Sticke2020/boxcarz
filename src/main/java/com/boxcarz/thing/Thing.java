@@ -1,8 +1,9 @@
 package com.boxcarz.thing;
 
+import java.io.Serializable;
 
 // BASIC THING TYPE THAT DEFINES ALL OBJECTS IN THE GAME
-public class Thing { 
+public class Thing implements Serializable { 
     private String name;
     private String description;
 

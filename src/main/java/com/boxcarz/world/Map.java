@@ -14,7 +14,7 @@ public class Map {
     }
      
 
-    static int moveTo(Actor actor, Direction direction) {
+    static int moveTo(Actor actor, Direction direction, Game game) {
         Room r = actor.getRoom();
         int exit;
 
@@ -37,37 +37,36 @@ public class Map {
         }
 
         if (exit != Direction.NOEXIT) {
-            moveActorTo(actor, Game.map.get(exit));
+            moveActorTo(actor, game.getMap().get(exit));
         }
         return exit;
     }
 
 
-    static void updateOutput(int roomNumber) {
+    static void updateOutput(Game game, int roomNumber) {
         if (roomNumber == Direction.NOEXIT) {
-            System.out.println("No Exit!");
+            System.out.println("No Exit!\n");
         } else {
-            Commands.look();
+            Commands.look(game);
         }
     }
 
 
-    public static void goNorth() {
-        updateOutput(moveTo(Game.player, Direction.NORTH));
+    public static void goNorth(Game game) {
+        updateOutput(game, moveTo(game.getPlayer(), Direction.NORTH, game));
     }
 
-    public static void goEast() {
-        updateOutput(moveTo(Game.player, Direction.EAST));
+    public static void goEast(Game game) {
+        updateOutput(game, moveTo(game.getPlayer(), Direction.EAST, game));
     }
 
-    public static void goSouth() {
-        updateOutput(moveTo(Game.player, Direction.SOUTH));
+    public static void goSouth(Game game) {
+        updateOutput(game, moveTo(game.getPlayer(), Direction.SOUTH, game));
     }
 
-    public static void goWest() {
-        updateOutput(moveTo(Game.player, Direction.WEST));
+    public static void goWest(Game game) {
+        updateOutput(game, moveTo(game.getPlayer(), Direction.WEST, game));
     }
 
 
 }
-
