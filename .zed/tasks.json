@@ -1,0 +1,6 @@
+[
+  {
+    "label": "Compile Java Project",
+    "command": "./zedBuild.sh",
+  },
+]

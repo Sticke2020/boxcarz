@@ -1,0 +1,12 @@
+[
+  {
+    "label": "Run Main App",
+    "adapter": "Java",
+    "request": "launch",
+    "mainClass": "com.boxcarz.Main",
+    "classPaths": ["build"],
+    "sourcePaths": ["src"],
+    "cwd": "${workspaceFolder}",
+    "build": "Compile Java Project",
+  },
+]
