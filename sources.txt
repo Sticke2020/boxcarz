@@ -7,6 +7,7 @@ src/main/java/com/boxcarz/commands/Commands.java
 src/main/java/com/boxcarz/util/InputHelper.java
 src/main/java/com/boxcarz/util/SaveLoad.java
 src/main/java/com/boxcarz/actor/Actor.java
+src/main/java/com/boxcarz/actor/NPC.java
 src/main/java/com/boxcarz/item/Item.java
 src/main/java/com/boxcarz/thing/Thing.java
 src/main/java/com/boxcarz/thing/ThingHolder.java

@@ -14,7 +14,7 @@ public class Actor extends ThingHolder {
         super(name, description, thingList);
         this.room = room;
     }
-
+  
 
     public Room getRoom() {
         return this.room;

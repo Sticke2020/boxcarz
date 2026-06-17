@@ -1,11 +1,15 @@
 package com.boxcarz.world;
 
+import java.util.ArrayList;
+
+import com.boxcarz.actor.NPC;
 import com.boxcarz.thing.ThingHolder;
 import com.boxcarz.thing.ThingList;
 
 
 public class Room extends ThingHolder {
     private int north, east, south, west;
+    private ArrayList<NPC> npcs;
 
     
     public Room(String name, String description, int north, int east, int south, int west, ThingList thingList) {
@@ -14,6 +18,7 @@ public class Room extends ThingHolder {
         this.east = east;
         this.south = south;
         this.west = west;
+        this.npcs = new ArrayList<>();
     } 
     
     
@@ -57,12 +62,25 @@ public class Room extends ThingHolder {
         this.west = w;
     }
 
+    public void setNPC(NPC npc) {
+        npcs.add(npc);
+    }
+
+    public ArrayList<NPC> getNPCs() {
+        return npcs;
+    }
+
 
     // DESCRIBES THE ITEMS IN THE ROOM
     public String describe() {
+        String n = "None.";
+        for (NPC npc : getNPCs()) {
+            n = NPC.describeNPC(npc);
+        }
         return String.format("%s. %s.",
-               getName(), getDescription())
-                + "\nItems here:\n" + getThings().describeThings();
+               getName(), getDescription()) + "\n"
+                + "\nItems here:\n" + getThings().describeThings()
+                + "\nLifeforms here:\n" + n + "\n";
     }
 
 

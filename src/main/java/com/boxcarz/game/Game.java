@@ -1,11 +1,10 @@
 package com.boxcarz.game;
 
-import com.boxcarz.actor.Actor;
+import com.boxcarz.actor.*;
 import com.boxcarz.item.Item;
 import com.boxcarz.thing.ThingList;
 import com.boxcarz.world.Direction;
 import com.boxcarz.world.Room;
-import com.boxcarz.commands.Commands;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,6 +36,7 @@ public class Game implements Serializable{
         ThingList yellowSleeperCarList = new ThingList();
 
         ThingList playerList = new ThingList();
+
 
         // ADD ROOMS TO THE MAP (N, E, S, W)
         map.add(
@@ -95,6 +95,22 @@ public class Game implements Serializable{
             )
         );
 
+        // CREATE NPC
+        NPC greg = new NPC(
+            "Greg",
+            "Greg has been living on this train for years.",
+            "If you look around you might find some things!"
+        );
+        NPC allison = new NPC(
+            "Allison",
+            "Allison was a veterinarian before the apocalypse.",
+            "Caring for animals is what I love most!"
+        );
+
+        // ADD NPC TO ROOM
+        map.get(4).setNPC(greg);
+        map.get(2).setNPC(allison);
+
         // CREATE PLAYER AND PLACE IN ROOM 0
         player = new Actor(
             "Player",
@@ -102,6 +118,8 @@ public class Game implements Serializable{
             playerList,
             map.get(0)
         );
+
+        
     } // END OF GAME METHOD
 
     public ArrayList<Room> getMap() {
@@ -125,6 +143,14 @@ public class Game implements Serializable{
         System.out.println("You awake in a train car with no memory of how you got there.");
         System.out.println("It's dim and you are in desperate need of water.");
         System.out.println("Find a way out!"); 
-        Commands.help();
+        System.out.println(" ______________________________________________________________");
+        System.out.println("|                                                              |");
+        System.out.println("|   [ Enter n, s, e, or w ] -- ( to move )                     |");
+        System.out.println("|   [ Enter help ] ----------- ( to see the useable commands ) |");
+        System.out.println("|   [ Enter save ] ----------- ( to save the current game)     |");
+        System.out.println("|   [ Enter load ] ----------- ( to load the last saved game ) |");
+        System.out.println("|   [ Enter q ] -------------- ( to quit )                     |");
+        System.out.println("|______________________________________________________________|");
+        System.out.println("");
     }
 } // END OF GAME CLASS

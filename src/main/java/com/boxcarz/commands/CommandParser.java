@@ -73,6 +73,9 @@ public class CommandParser {
                 case "inventory":
                     Commands.showInventory(game);
                     break;
+                case "talk":
+                    Commands.talk(game);
+                    break;
                 case "help":
                     Commands.help();
                    break; 
