@@ -18,7 +18,7 @@ public static String describeNPC(NPC npc) {
     String n = "None.";
 
     if (!npc.equals(null)) {
-        n = npc.getName() + ": " + npc.getDescription();
+        n = npc.describe();
     }
     
     return n;

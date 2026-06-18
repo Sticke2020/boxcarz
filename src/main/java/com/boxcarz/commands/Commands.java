@@ -52,7 +52,13 @@ public class Commands {
 
     public static void showInventory(Game game) {
         String inventory = game.getPlayer().getThings().describeThings();
-        System.out.println(inventory);
+
+        if (inventory.contains("None.")) {
+            System.out.println("Your inventory is empty.\n");
+        } else {
+            System.out.println("Your inventory contains:");
+            System.out.println(inventory);
+        }
     }
 
     public static void transferItem(Thing item, ThingList from, ThingList to) {
@@ -116,8 +122,6 @@ public class Commands {
         System.out.println("|______________________________________________________________|");
         System.out.println("");
     }
-
- 
 
     
 } // END OF CLASS

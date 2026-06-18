@@ -6,14 +6,29 @@ import java.io.Serializable;
 public class Thing implements Serializable { 
     private String name;
     private String description;
+    private boolean takable;
+    private boolean movable;
 
 
     public Thing(String Name, String Description) {
         this.name = Name;
         this.description = Description;
+        this.takable = true;
+        this.movable = true;
     }
 
-
+    public Thing(String Name, String Description, boolean canTake, boolean canMove) {
+        this.name = Name;
+        this.description = Description;
+        this.takable = canTake;
+        this.movable = canMove;
+    }
+   
+   public String describe() {
+       return name + ": " + description;
+   }
+    
+    // GETTERS AND SETTERS
     public String getName() {
         return name;
     }
@@ -33,5 +48,19 @@ public class Thing implements Serializable {
         this.description = Description;
     }
 
+    public boolean isTakable() {
+        return takable;
+    }
 
+    public void setTakable(boolean takable) {
+        this.takable = takable;
+    }
+
+    public boolean isMoveable() {
+        return movable;
+    }
+
+    public void setMovabel(boolean movable) {
+        this.movable = movable;
+    }
 } // END OF CLASS

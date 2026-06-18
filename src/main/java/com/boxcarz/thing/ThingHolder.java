@@ -10,6 +10,11 @@ public class ThingHolder extends Thing {
         things = thingList;
     }
 
+    public ThingHolder(String name, String description, boolean canTake, boolean canMove, ThingList thingList) {
+        super(name, description, canTake, canMove);
+        things = thingList;
+    }
+
 
     public ThingList getThings() {
         return things;

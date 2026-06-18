@@ -2,6 +2,7 @@ package com.boxcarz.game;
 
 import com.boxcarz.actor.*;
 import com.boxcarz.item.Item;
+import com.boxcarz.thing.ContainerThing;
 import com.boxcarz.thing.ThingList;
 import com.boxcarz.world.Direction;
 import com.boxcarz.world.Room;
@@ -36,6 +37,23 @@ public class Game implements Serializable{
         ThingList yellowSleeperCarList = new ThingList();
 
         ThingList playerList = new ThingList();
+
+        ThingList chestList = new ThingList();
+        chestList.add(new Item("Marble", "A single glass marble", 3));
+
+        // ADD CONTAINERS / CONTAINERTHINGS
+        ContainerThing chest = new ContainerThing(
+            "Chest",
+            "A small wooden chest, it appears old and worn.",
+            false, 
+            false,
+            true,
+            false,
+            chestList
+        );
+
+        // ADD CONTAINER / CONTAINERTHING TO ROOMLISTS
+        cabooseList.add(chest);
 
 
         // ADD ROOMS TO THE MAP (N, E, S, W)

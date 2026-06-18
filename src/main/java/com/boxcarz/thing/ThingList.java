@@ -11,11 +11,15 @@ public class ThingList extends ArrayList<Thing> {
         String items = "";
 
         if (this.size() == 0) {
-            items = "nothing.\n";
+            items = "None.\n";
         } else {
             for (Thing t : this) {
-                items = items + t.getName() + ": " + t.getDescription() + ". " +
-                    "Value = " + ((Item) t).getValue() + " Gold\n";
+                if (t instanceof Item item) {
+                    items = items + item.describe() + ". " +
+                        "Value -> " + item.getValue() + " Gold\n";
+                } else if (t instanceof ContainerThing container) {
+                    items = items + container.getName() + ":\n";
+                }
             }
         }
         return items;

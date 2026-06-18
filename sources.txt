@@ -12,4 +12,5 @@ src/main/java/com/boxcarz/item/Item.java
 src/main/java/com/boxcarz/thing/Thing.java
 src/main/java/com/boxcarz/thing/ThingHolder.java
 src/main/java/com/boxcarz/thing/ThingList.java
+src/main/java/com/boxcarz/thing/ContainerThing.java
 src/main/java/com/boxcarz/Main.java
